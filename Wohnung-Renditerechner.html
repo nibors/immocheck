@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
+    <title>Immobilien Renditerechner</title>
+       <style>
+
+      h1 { color: orange; }
+      h2 { color: orange; }
+      body {color: white;font-family: Lato; background-color: #B8B8B8; }
+      input { background-color: lightgrey; }
+      select { background-color: lightgrey; }
+      button {background-color: orange; font-size: 16px; padding: 5px 10px; border-radius: 15px;}
+      td {padding: 5px;}
+      div {float:left;background-image: url("background.jpg");padding: 20px;margin: 10px;border-radius: 20px;}
+
+
+    </style>
+  </head>
+
+
+
+<body>
+
+
+
+<div>	
+
+<h1>Immobilien Rendite SchnellCheck</h1>
+
+<p>Bitte gib hier die Daten zum Objekt ein. Klicke anschließend auf jetzt berechnen.</p>
+
+
+
+
+<table>
+<tr>
+<td>
+	<h2>Objektdaten</h2>
+
+
+ <select id="bundesland">
+  <option value="Auswahl">Bundesland auswählen</option>
+   <option value="Baden-Wuerttemberg">Baden-Württemberg</option>
+  <option value="Bayern">Bayern</option>
+  <option value="Berlin">Berlin</option>
+  <option value="Brandenburg">Brandenburg</option>
+  <option value="Bremen">Bremen</option>
+  <option value="Hamburg">Hamburg</option>
+  <option value="Hessen">Hessen</option>
+  <option value="Mecklenburg-Vorpommern">Mecklenburg-Vorpommern</option>
+  <option value="Niedersachsen">Niedersachsen</option>
+  <option value="Nordrhein-Westfalen">Nordrhein-Westfalen</option>
+  <option value="Rheinland-Pfalz">Rheinland-Pfalz</option>
+  <option value="Sachsen">sachssen</option>
+  <option value="Sachsen-Anhalt">Sachsen-Anhalt</option>
+  <option value="Saarland">Saarland</option>
+  <option value="Schleswig-Holstein">Schleswig-Holstein</option>
+  <option value="Thueringen">Thüringen</option>
+</select> 
+
+<p id="kaufnebenkosten1"><p>
+</td>
+
+</tr>
+<tr>
+<td>
+	<p>Angebotspreis</p>
+<input id="preis">
+</td>
+<td>
+	<p>Quadratmeter</p>
+<input id="qm">
+</td>
+</tr>
+<tr>
+	<td>	
+	<p>Maklergebühr(in %)</p>
+<input id="maklergebuehr">
+</td>
+<td>
+	<p>Nettokaltmiete pro Monat in €</p>
+<input id="nettokaltmiete">
+</td>
+</tr>
+<tr>
+
+<tr>
+<td>
+	<h2>Finanzierung</h2>
+</td>	
+</tr>
+<td>
+	<p>Zinssatz in %</p>
+<input id="zinssatz">
+</td><td>
+	<p>Tilgung in %</p>
+<input id="tilgung">
+</td>
+	<td>
+	<p>gewünschter Eigenkapitalanteil in %</p>
+<input id="eigenkapitalanteil">
+</td>
+</tr>
+</table>
+
+
+<br>
+<br>
+<br>
+
+<button id="myButton">Jetzt berechnen</button>
+
+</div>
+
+<div>
+
+<table>
+<tr>
+<td>
+<h2>Maklerformel</h2>
+</td>
+<td>
+<h2>Cashflow-Berechnung</h2>
+</td>
+</tr>
+<tr>
+<td>
+<p id="qmpreis"><p>
+<p id="makler"><p>
+<p id="kaufnebenkosten2"><p>
+<p id="gesamtinvestitionskosten"><p>	
+<p id="jahresnettokaltmiete"><p>
+<p id="faktor"><p>
+<p id="bruttorendite"><p>
+<p id="nettorendite"><p>
+</td>
+<td>
+<p id="eigenkapital"><p>
+<p id="finanzierungsbetrag"><p>
+<p id="zinsundtilgung"><p>
+<p id="zinsundtilgungmonat"><p>
+<p id="bewirtschaftungskosten"><p>
+<p id="cashflow"><p>
+<p id="cashflowmonat"><p>
+</td>
+</tr>
+</table>
+
+</div>
+
+<script type="text/javascript">
+
+document.getElementById("myButton").onclick=function() {
+
+	var bundesland=document.getElementById("bundesland").value; 
+	console.log(bundesland);
+	if (bundesland === "Hamburg") {
+		var faktorKaufnebenkosten = 0.06;
+	}
+	else if (bundesland === "Saarland") {
+		var faktorKaufnebenkosten = 0.08;
+	}
+	else if (bundesland === "Nordrhein-Westfalen") {
+		var faktorKaufnebenkosten = 0.065;
+	}
+
+	else if (bundesland === "Baden-Wuerttemberg") {
+		var faktorKaufnebenkosten = 0.05;
+	}
+
+	else if (bundesland === "Nordrhein-Westfalen") {
+		var faktorKaufnebenkosten = 0.065;
+	}
+
+	else if (bundesland === "Nordrhein-Westfalen") {
+		var faktorKaufnebenkosten = 0.065;
+	}
+
+	else if (bundesland === "Nordrhein-Westfalen") {
+		var faktorKaufnebenkosten = 0.065;
+	}
+
+	else if (bundesland === "Nordrhein-Westfalen") {
+		var faktorKaufnebenkosten = 0.065;
+	}
+
+	else if (bundesland === "Nordrhein-Westfalen") {
+		var faktorKaufnebenkosten = 0.065;
+	}
+
+	else if (bundesland === "Nordrhein-Westfalen") {
+		var faktorKaufnebenkosten = 0.065;
+	}
+
+	else if (bundesland === "Nordrhein-Westfalen") {
+		var faktorKaufnebenkosten = 0.065;
+	}
+
+	else {
+		var faktorKaufnebenkosten = 0.06;
+	};
+	console.log(faktorKaufnebenkosten); 
+	var qm=Number(document.getElementById("qm").value);
+	var preis=Number(document.getElementById("preis").value);
+	var maklergebuehr=Number(document.getElementById("maklergebuehr").value);
+	var nettokaltmiete=Number(document.getElementById("nettokaltmiete").value);
+	var eigenkapitalanteil = Number(document.getElementById("eigenkapitalanteil").value/100);
+	var zinssatz = Number(document.getElementById("zinssatz").value/100);
+	var tilgungssatz = Number(document.getElementById("tilgung").value/100);
+	var qmpreis=preis/qm;
+	var maklergebuehr2=preis*maklergebuehr/100;
+	var kaufnbk = preis * faktorKaufnebenkosten;
+	var gesamtinvestitionskosten = preis + kaufnbk + maklergebuehr2;
+	var jahresnettokaltmiete = nettokaltmiete * 12;
+	var faktor = preis / jahresnettokaltmiete;
+	var faktor = faktor.toFixed(2);
+	var bruttorendite = 100 / faktor; 
+	var nettorendite = (jahresnettokaltmiete / gesamtinvestitionskosten) * 100;
+	var eigenkapital = gesamtinvestitionskosten * eigenkapitalanteil;
+	var finanzierungsbetrag = gesamtinvestitionskosten - eigenkapital;
+	var zins = finanzierungsbetrag * zinssatz;
+	var tilgung = finanzierungsbetrag * tilgungssatz;
+	var zinsUndTilgung = finanzierungsbetrag * (zinssatz + tilgungssatz);
+	var bewirtschaftungskosten = jahresnettokaltmiete * 0.2;
+	var cashflow = jahresnettokaltmiete - bewirtschaftungskosten - zinsUndTilgung;
+	var cashflow = cashflow.toFixed(2);
+	var zinsUndTilgung = zinsUndTilgung.toFixed(2);
+
+
+
+
+
+	console.log(typeof preis);
+	console.log(typeof zinsUndTilgung);
+	console.log()
+	console.log(zinsUndTilgung);
+
+
+	document.getElementById("qmpreis").innerHTML = "Quadratmeterpreis: " + qmpreis + " €/qm";
+	document.getElementById("makler").innerHTML = "Maklerkosten: " + maklergebuehr2 + " €";
+	document.getElementById("gesamtinvestitionskosten").innerHTML = "Gesamtinvestitionskosten: " + gesamtinvestitionskosten + " €";
+	document.getElementById("kaufnebenkosten2").innerHTML = "Kaufnebenkosten: " + kaufnbk + " €";
+	document.getElementById("jahresnettokaltmiete").innerHTML = "Jahresnettokaltmiete: " + jahresnettokaltmiete + " €";
+	document.getElementById("faktor").innerHTML = "Faktor: " + faktor;
+	document.getElementById("eigenkapital").innerHTML = "Eigenkapital: " + eigenkapital + " €";
+	document.getElementById("finanzierungsbetrag").innerHTML = "Finanzierungsbetrag: " + finanzierungsbetrag + " €";
+	document.getElementById("zinsundtilgung").innerHTML = "Kapitaldienst (Zins und Tilgung) pro Jahr: " + zinsUndTilgung + " €";
+	document.getElementById("zinsundtilgungmonat").innerHTML = "Kapitaldienst (Zins und Tilgung) pro Monat: " + zinsUndTilgung / 12 + " €";
+	document.getElementById("bewirtschaftungskosten").innerHTML = "Bewirtschaftsungskosten pro Jahr (20% der Jahresnettokaltmiete): " + bewirtschaftungskosten + " €";
+	document.getElementById("cashflow").innerHTML = "Cashflow pro Jahr: " + cashflow + " €";
+	document.getElementById("cashflowmonat").innerHTML = "Cashflow pro Monat: " + cashflow / 12 + " €";
+	document.getElementById("bruttorendite").innerHTML = "Bruttoendite: " + bruttorendite + " %";
+	document.getElementById("nettorendite").innerHTML = "Nettoendite: " + nettorendite + " %";
+
+
+};
+
+
+
+</script>
+
+</body>
