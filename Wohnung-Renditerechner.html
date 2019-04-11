@@ -53,6 +53,14 @@
 			-moz-box-shadow: 9px 8px 5px 0px rgba(0,0,0,0.75);
 			box-shadow: 9px 8px 5px 0px rgba(0,0,0,0.75);
 		}
+
+		div#objektdaten {
+			display:inline;
+		}
+
+		div#ergebnisse {
+			display:none;
+		}
 	     
 	      div.header-bar {
 	      	background-color: rgba(0,0,0,1);
@@ -94,7 +102,7 @@
 </div>
 
 
-	<div class="kasten">	
+	<div class="kasten" id="objektdaten">	
 
 		<h2>Objektdaten</h2>
 
@@ -187,7 +195,7 @@
 
 	*
 
-	<div class="kasten">
+	<div class="kasten" id="ergebnisse">
 		<h2>Ergebnisse</h2>
 		<table border="1">
 
@@ -353,11 +361,13 @@ document.getElementById("myButton").onclick=function() {
 	if (bundesland === "Auswahl") {
 		console.log("Bundesland ist leer");
 		document.getElementById("errBundesland").innerHTML = "Bitte geben Sie ein Bundesland an.";
+		return;
 	}
 
 	if (document.getElementById("preis").value === "") {
 		console.log("Kein Preis angegeben");
 		document.getElementById("errPreis").innerHTML = "Bitte geben Sie einen Angebotspreis an.";
+		return;
 	
 	}
 
@@ -382,7 +392,8 @@ document.getElementById("myButton").onclick=function() {
 	document.getElementById("bruttorendite").innerHTML = "Bruttorendite: " + bruttorendite + " %";
 	document.getElementById("nettorendite").innerHTML = "Nettorendite: " + nettorendite + " %";
 	document.getElementById("disclaimer").innerHTML = "Diese Auswertung soll einen schnellen Überblick zu Kennzahlen zur Immobilie geben. Sie stellt keine Anlageberatung dar. "
-
+	document.getElementById("ergebnisse").style.display = "inline";
+	document.getElementById("objektdaten").style.display = "none";
 // Farbliche Visualisierung des Faktors 
 
 if (faktor > 20) {
