@@ -61,6 +61,11 @@
 		div#ergebnisse {
 			display:none;
 		}
+
+
+			#datenNeu {
+			display:none;
+		}
 	     
 	      div.header-bar {
 	      	background-color: rgba(0,0,0,1);
@@ -193,7 +198,9 @@
 
 	</div>
 
-	*
+	<button id="datenNeu">Objektdaten ändern</button>
+
+	<
 
 	<div class="kasten" id="ergebnisse">
 		<h2>Ergebnisse</h2>
@@ -394,6 +401,7 @@ document.getElementById("myButton").onclick=function() {
 	document.getElementById("disclaimer").innerHTML = "Diese Auswertung soll einen schnellen Überblick zu Kennzahlen zur Immobilie geben. Sie stellt keine Anlageberatung dar. "
 	document.getElementById("ergebnisse").style.display = "inline";
 	document.getElementById("objektdaten").style.display = "none";
+	document.getElementById("datenNeu").style.display = "inline";
 // Farbliche Visualisierung des Faktors 
 
 if (faktor > 20) {
@@ -409,6 +417,13 @@ else if (faktor <= 20) {
 	}
 
 };
+
+
+document.getElementById("datenNeu").onclick=function()  {
+	document.getElementById("objektdaten").style.display = "inline";
+	document.getElementById("datenNeu").style.display = "none";
+
+}
 
 </script>
 
