@@ -6,28 +6,86 @@
 	<link href="https://fonts.googleapis.com/css?family=Abel" rel="stylesheet">
     <title>Immobilien Renditerechner</title>
        <style>
+	      h1 {
+	      	color: #8BBB4A;
+	      	margin-top:20px;
+	      	margin-bottom: 20px;
+	      	font-size:42px;
+	      	text-shadow: 2px 3px #696969
+	      }
+	      h2 {
+	      	color: #8BBB4A; 
+	      }
+	      body {
+		      	font-family: 'Abel', sans-serif;
+		      	font-size: 18px; 
+		      	background-color:#3b3b3b;
+		      	background-repeat:no-repeat;
+		      	background-size: 100%;
+	      }
+	      input {
+	      	background-color: lightgrey;
+	      	font-size: 18px;
+	      }
+	      select { 
+	      	background-color: lightgrey; 
+	      }
+	      button {
+	      	background-color: orange;
+	      	 font-size: 16px;
+	      	  padding: 5px 10px;
+	      	   border-radius: 5px;
+	      	   width:30%;
+	      }
 
-      h1 {color: #8BBB4A;margin-top:20px;margin-bottom: 20px; font-size:42px; }
-      h2 {color: #8BBB4A; }
-      body {font-family: 'Abel', sans-serif; background-image: url("22513_13.jpg");background-size: 100%;}
-      input { background-color: lightgrey; }
-      select { background-color: lightgrey; }
-      button {background-color: orange; font-size: 16px; padding: 5px 10px; border-radius: 15px;}
-      td {padding: 5px;}
-      div.kasten {color:white;float:left;background-image: url("background.jpg");padding: 20px;margin: 10px;border-radius: 20px;}
-      div.header-bar {background-image: url("background.jpg");opacity: 0.6;text-align:center;padding: 20px;margin-bottom:20px;}
-      div.seitentitel {max-width:50%;margin:auto;}
-     /* tr.results {border:solid; border-width:5px; border-color: white;} */
-   
-    
+	      td {
+	      	padding: 5px;
+	      }
 
+	      div.kasten {
+	      	color:white;
+	      	float:left;
+	      	background-image: url("background.jpg");
+	      	padding: 20px;
+	      	margin:10px;
+	      	border-radius: 20px;
+	      	-webkit-box-shadow: 9px 8px 5px 0px rgba(0,0,0,0.75);
+			-moz-box-shadow: 9px 8px 5px 0px rgba(0,0,0,0.75);
+			box-shadow: 9px 8px 5px 0px rgba(0,0,0,0.75);
+		}
+	     
+	      div.header-bar {
+	      	background-color: rgba(0,0,0,1);
+	      	text-align:center;
+	      	padding: 20px;
+	      	margin-bottom:20px;
+	      	border-color:#696969;
+	      	border-width:3px;
+	      	border-style:inset;
+	      }
 
+	      div.seitentitel {
+	      	max-width:50%;
+	      	margin:auto;
+	      	opacity:1;
+	      }
+
+	      #disclaimer {
+	      	font-size:8px;
+	      }
+
+	      .errMessage {
+	      			color: red;
+      		};
+
+	     /* tr.results {border:solid; border-width:5px; border-color: white;} */
     </style>
   </head>
 
 
 
 <body>
+
 <div class="header-bar">
 	<div class="seitentitel">
 		<img src="icon.png" height="80" width="80" style="float:left">
@@ -40,7 +98,7 @@
 
 		<h2>Objektdaten</h2>
 
-		<p>Bitte gib hier die Daten zum Objekt ein. Klicke anschließend auf jetzt berechnen.</p>
+		<p>Bitte gib hier die Daten zum Objekt ein. Klicke anschließend auf "Jetzt berechnen".</p>
 
 		<table>
 			<tr>
@@ -67,6 +125,7 @@
 			  <option value="Schleswig-Holstein">Schleswig-Holstein</option>
 			  <option value="Thueringen">Thüringen</option>
 			</select> 
+			<span class="errMessage" id="errBundesland"></span>
 
 			<p id="kaufnebenkosten1"><p>
 			</td>
@@ -74,17 +133,18 @@
 			</tr>
 			<tr>
 			<td>
-				<p>Angebotspreis</p>
+				<p>Angebotspreis in €</p>
 			<input id="preis">
+			<p class="errMessage" id="errPreis"></p>
 			</td>
 			<td>
-				<p>Quadratmeter</p>
+				<p>Quadratmeter in qm</p>
 			<input id="qm">
 			</td>
 			</tr>
 			<tr>
 				<td>	
-				<p>Maklergebühr(in %)</p>
+				<p>Maklergebühr (in %)</p>
 			<input id="maklergebuehr">
 			</td>
 			<td>
@@ -106,6 +166,8 @@
 				<p>Tilgung in %</p>
 			<input id="tilgung">
 			</td>
+			</tr>
+			<tr>
 				<td>
 				<p>gewünschter Eigenkapitalanteil in %</p>
 			<input id="eigenkapitalanteil">
@@ -117,54 +179,68 @@
 		<br>
 		<br>
 		<br>
-
-		<button id="myButton">Jetzt berechnen</button>
+		<div align="center">
+			<button id="myButton">Jetzt berechnen</button>
+		</div>
 
 	</div>
 
-	<div class="kasten">
+	*
 
-		<table class="results">
+	<div class="kasten">
+		<h2>Ergebnisse</h2>
+		<table border="1">
+
 		<tr>
-		<td>
-		<h2>Maklerformel</h2>
-		</td>
-		<td>
-		<h2>Cashflow-Berechnung</h2>
-		</td>
+			<td>
+				<h2>Maklerformel</h2>
+			</td>
+			<td>
+				<h2>Cashflow-Berechnung</h2>
+			</td>
 		</tr>
 		<tr>
-		<td>
-		<p id="qmpreis"><p>
-		<p id="makler"><p>
-		<p id="kaufnebenkosten2"><p>
-		<p id="gesamtinvestitionskosten"><p>	
-		<p id="jahresnettokaltmiete"><p>
-		<p id="faktor"><p>
-		<p id="bruttorendite"><p>
-		<p id="nettorendite"><p>
-		</td>
-		<td>
-		<p id="eigenkapital"><p>
-		<p id="finanzierungsbetrag"><p>
-		<p id="zinsundtilgung"><p>
-		<p id="zinsundtilgungmonat"><p>
-		<p id="bewirtschaftungskosten"><p>
-		<p id="cashflow"><p>
-		<p id="cashflowmonat"><p>
-		</td>
+			<td>
+				<p id="qmpreis"><p>
+				<p id="makler"><p>
+				<p id="kaufnebenkosten2"><p>
+				<p id="gesamtinvestitionskosten"><p>	
+				<p id="jahresnettokaltmiete"><p>
+				<p id="faktor"><p>
+				<p id="bruttorendite"><p>
+				<p id="nettorendite"><p>
+			</td>
+			<td>
+				<p id="eigenkapital"><p>
+				<p id="finanzierungsbetrag"><p>
+				<p id="zinsundtilgung"><p>
+				<p id="zinsundtilgungmonat"><p>
+				<p id="bewirtschaftungskosten"><p>
+				<p id="cashflow"><p>
+				<p id="cashflowmonat"><p>
+			</td>
 		</tr>
 		</table>
+		<p id="disclaimer"></p>
 
 	</div>
 
 
 <script type="text/javascript">
 
+
+	// Aufrufen der Funktion bei Klick auf Jetzt berechnen Button 
+
 document.getElementById("myButton").onclick=function() {
 
 	var bundesland=document.getElementById("bundesland").value; 
 	console.log(bundesland);
+
+
+	
+
+// Steuersaetze fuer Grunderwerbssteuer 
+
 	if (bundesland === "Hamburg") {
 		var faktorKaufnebenkosten = 0.06;
 	}
@@ -179,31 +255,51 @@ document.getElementById("myButton").onclick=function() {
 		var faktorKaufnebenkosten = 0.05;
 	}
 
-	else if (bundesland === "Nordrhein-Westfalen") {
+	else if (bundesland === "Bayern") {
+		var faktorKaufnebenkosten = 0.035;
+	}
+
+	else if (bundesland === "Berlin") {
+		var faktorKaufnebenkosten = 0.06;
+	}
+
+	else if (bundesland === "Brandenburg") {
 		var faktorKaufnebenkosten = 0.065;
 	}
 
-	else if (bundesland === "Nordrhein-Westfalen") {
+	else if (bundesland === "Bremen") {
+		var faktorKaufnebenkosten = 0.05;
+	}
+
+	else if (bundesland === "Hessen") {
+		var faktorKaufnebenkosten = 0.06;
+	}
+
+	else if (bundesland === "Mecklenburg-Vorpommern") {
+		var faktorKaufnebenkosten = 0.05;
+	}
+
+	else if (bundesland === "Niedersachsen") {
+		var faktorKaufnebenkosten = 0.05;
+	}
+
+	else if (bundesland === "Rheinland-Pfalz") {
+		var faktorKaufnebenkosten = 0.05;
+	}
+
+	else if (bundesland === "Sachsen") {
+		var faktorKaufnebenkosten = 0.035;
+	}
+
+	else if (bundesland === "Sachsen-Anhalt") {
 		var faktorKaufnebenkosten = 0.065;
 	}
 
-	else if (bundesland === "Nordrhein-Westfalen") {
+	else if (bundesland === "Schleswig-Holstein") {
 		var faktorKaufnebenkosten = 0.065;
 	}
 
-	else if (bundesland === "Nordrhein-Westfalen") {
-		var faktorKaufnebenkosten = 0.065;
-	}
-
-	else if (bundesland === "Nordrhein-Westfalen") {
-		var faktorKaufnebenkosten = 0.065;
-	}
-
-	else if (bundesland === "Nordrhein-Westfalen") {
-		var faktorKaufnebenkosten = 0.065;
-	}
-
-	else if (bundesland === "Nordrhein-Westfalen") {
+	else if (bundesland === "Thüringen") {
 		var faktorKaufnebenkosten = 0.065;
 	}
 
@@ -211,14 +307,19 @@ document.getElementById("myButton").onclick=function() {
 		var faktorKaufnebenkosten = 0.06;
 	};
 	console.log(faktorKaufnebenkosten); 
-	var qm=Number(document.getElementById("qm").value);
-	var preis=Number(document.getElementById("preis").value);
-	var maklergebuehr=Number(document.getElementById("maklergebuehr").value);
+
+
+// Berechnung der Daten 
+
+	var qm=Number(document.getElementById("qm").value.replace(",","."));
+	var preis=Number(document.getElementById("preis").value.replace(".",""));
+	var maklergebuehr=Number(document.getElementById("maklergebuehr").value.replace(",","."));
 	var nettokaltmiete=Number(document.getElementById("nettokaltmiete").value);
 	var eigenkapitalanteil = Number(document.getElementById("eigenkapitalanteil").value/100);
 	var zinssatz = Number(document.getElementById("zinssatz").value/100);
 	var tilgungssatz = Number(document.getElementById("tilgung").value/100);
 	var qmpreis=preis/qm;
+	var qmpreis = qmpreis.toFixed(0);
 	var maklergebuehr2=preis*maklergebuehr/100;
 	var kaufnbk = preis * faktorKaufnebenkosten;
 	var gesamtinvestitionskosten = preis + kaufnbk + maklergebuehr2;
@@ -226,18 +327,18 @@ document.getElementById("myButton").onclick=function() {
 	var faktor = preis / jahresnettokaltmiete;
 	var faktor = faktor.toFixed(2);
 	var bruttorendite = 100 / faktor; 
+	var bruttorendite = bruttorendite.toFixed(2);
 	var nettorendite = (jahresnettokaltmiete / gesamtinvestitionskosten) * 100;
+	var nettorendite = nettorendite.toFixed(2);
 	var eigenkapital = gesamtinvestitionskosten * eigenkapitalanteil;
 	var finanzierungsbetrag = gesamtinvestitionskosten - eigenkapital;
-	var zins = finanzierungsbetrag * zinssatz;
+	var zins = finanzierungsbetrag * zinssatz/100;
 	var tilgung = finanzierungsbetrag * tilgungssatz;
 	var zinsUndTilgung = finanzierungsbetrag * (zinssatz + tilgungssatz);
+	var zinsUndTilgung = zinsUndTilgung.toFixed(2);
 	var bewirtschaftungskosten = jahresnettokaltmiete * 0.2;
 	var cashflow = jahresnettokaltmiete - bewirtschaftungskosten - zinsUndTilgung;
 	var cashflow = cashflow.toFixed(2);
-	var zinsUndTilgung = zinsUndTilgung.toFixed(2);
-
-
 
 
 
@@ -245,6 +346,24 @@ document.getElementById("myButton").onclick=function() {
 	console.log(typeof zinsUndTilgung);
 	console.log()
 	console.log(zinsUndTilgung);
+
+
+	// Fehlermeldung bei leeren Werten 
+
+	if (bundesland === "Auswahl") {
+		console.log("Bundesland ist leer");
+		document.getElementById("errBundesland").innerHTML = "Bitte geben Sie ein Bundesland an.";
+	}
+
+	if (document.getElementById("preis").value === "") {
+		console.log("Kein Preis angegeben");
+		document.getElementById("errPreis").innerHTML = "Bitte geben Sie einen Angebotspreis an.";
+	
+	}
+
+
+
+	// Darstellung der Resultate in Tabelle Makerformel und Cashflowberechnugn 
 
 
 	document.getElementById("qmpreis").innerHTML = "Quadratmeterpreis: " + qmpreis + " €/qm";
@@ -255,18 +374,30 @@ document.getElementById("myButton").onclick=function() {
 	document.getElementById("faktor").innerHTML = "Faktor: " + faktor;
 	document.getElementById("eigenkapital").innerHTML = "Eigenkapital: " + eigenkapital + " €";
 	document.getElementById("finanzierungsbetrag").innerHTML = "Finanzierungsbetrag: " + finanzierungsbetrag + " €";
-	document.getElementById("zinsundtilgung").innerHTML = "Kapitaldienst (Zins und Tilgung) pro Jahr: " + zinsUndTilgung + " €";
-	document.getElementById("zinsundtilgungmonat").innerHTML = "Kapitaldienst (Zins und Tilgung) pro Monat: " + zinsUndTilgung / 12 + " €";
-	document.getElementById("bewirtschaftungskosten").innerHTML = "Bewirtschaftsungskosten pro Jahr (20% der Jahresnettokaltmiete): " + bewirtschaftungskosten + " €";
+	document.getElementById("zinsundtilgung").innerHTML = "Kapitaldienst (Zins + Tilgung) p.a.: " + zinsUndTilgung + " €";
+	document.getElementById("zinsundtilgungmonat").innerHTML = "Kapitaldienst (Zins + Tilgung) p.M.: " + zinsUndTilgung / 12 + " €";
+	document.getElementById("bewirtschaftungskosten").innerHTML = "Bewirtschaftungskosten pro Jahr <br /> (20% der Jahresnettokaltmiete): " + bewirtschaftungskosten + " €";
 	document.getElementById("cashflow").innerHTML = "Cashflow pro Jahr: " + cashflow + " €";
 	document.getElementById("cashflowmonat").innerHTML = "Cashflow pro Monat: " + cashflow / 12 + " €";
-	document.getElementById("bruttorendite").innerHTML = "Bruttoendite: " + bruttorendite + " %";
-	document.getElementById("nettorendite").innerHTML = "Nettoendite: " + nettorendite + " %";
+	document.getElementById("bruttorendite").innerHTML = "Bruttorendite: " + bruttorendite + " %";
+	document.getElementById("nettorendite").innerHTML = "Nettorendite: " + nettorendite + " %";
+	document.getElementById("disclaimer").innerHTML = "Diese Auswertung soll einen schnellen Überblick zu Kennzahlen zur Immobilie geben. Sie stellt keine Anlageberatung dar. "
 
+// Farbliche Visualisierung des Faktors 
+
+if (faktor > 20) {
+
+document.getElementById("faktor") .style.color = "red";
+}
+else if (faktor <= 20) {
+	document.getElementById("faktor") .style.color = "green";
+	}
+
+	else {
+	document.getElementById("faktor") .style.color = "white";
+	}
 
 };
-
-
 
 </script>
 
